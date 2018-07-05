@@ -7,30 +7,31 @@ require_once '../models/Produto.php';
 function cadastrar(){ //OKAY
     $crud = new CrudProdutos();
     $tipos = $crud->getTiposProduto();
-    $tamanho = $crud->getTamanhoProduto();
+    $tamanhos = $crud->getTamanhos();
+    $cores =  $crud->getCores();
 
 	include '../views/cadastro_produtos.php';
 }
 
 function salvar(){ //DANDO ERRO
      echo "<pre>";
-//    print_r($_POST);
-//    print_r($_FILES);
 
     $origem = $_FILES['imagem']['tmp_name'];
     $destino = date('dmyhis').$_FILES['imagem']['name'];
 
     move_uploaded_file($origem, '../../assets/images/'.$destino);
 
-
     $produto = new Produto($_POST['nome'], $_POST['preco'], $_POST['estoque'],  $_POST['estoqueMin'], $_POST['descricao'],$_POST['tamanho'], $_POST['cor'], $_POST['tipoProduto'], $destino);
 
     $crud = new CrudProdutos();
-    $resultado = $crud->cadastrar($produto, $_POST['tamanho']);
+    $resultado = $crud->cadastrar($produto);
 
     if ($resultado == 1) {
         listar();
     }
+
+    echo "chegou na rota";
+    header("Location: produto_controller.php");
 }
 
 function listar(){ //OKAY
@@ -43,6 +44,8 @@ function listar(){ //OKAY
 function editar ($id){ //TA DANDO ERRADO
     $crud     = new CrudProdutos();
     $tipos = $crud->getTiposProduto();
+    $tamanhos = $crud->getTamanhos();
+    $cores =  $crud->getCores();
 
     $produto  = $crud->getProduto($id);
 
@@ -54,6 +57,10 @@ function excluir($id){ //OKAY
     $crud->excluir($id);
 
     listar();
+}
+
+function detalhar($id){
+
 }
 
 //ROTAS
@@ -80,9 +87,9 @@ if (isset($_GET['acao']) && !empty($_GET['acao']) ) {
 
 	} else {
 		echo "sera redirecionado pra lista";
+        listar();
 	}
 } else {
 	listar();
 }
 
-return editar();

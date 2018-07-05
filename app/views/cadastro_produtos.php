@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Projeto</title>
+    <title>Cad_Produto</title>
     <link rel="stylesheet" type="text/css" href="../../assets/semantic/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/style.css">
 
@@ -98,6 +98,10 @@
         <h1><label><font color="white">Cadastro de Produto</font> </h1>
         </div><br>
 
+
+
+
+
         <!--formulario de cadastro -->
         <form class="ui form" action="../controllers/produto_controller.php?acao=salvar" method="post" enctype="multipart/form-data">
 
@@ -110,7 +114,7 @@
             <div class="ui form">
                 <div class="two fields">
 
-                    <!-- TIPO PRODUTO -->
+                    <!-- TIPO PRODUTO -->'
                     <div class="field">
                         <label><font color="#363636">Tipo</font></label>
                         <select name="tipoProduto" id="tipoProduto">

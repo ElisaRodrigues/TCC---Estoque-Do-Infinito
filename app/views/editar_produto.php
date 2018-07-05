@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Projeto</title>
+    <title>EDITAR</title>
     <link rel="stylesheet" type="text/css" href="../../assets/semantic/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/style.css">
 
@@ -124,7 +124,16 @@
                 </div>
                 <div class="field">
                     <label><font color="#363636" size="2">Cor</font></label>
-                    <input type="text" name="cor" placeholder="Ex : Amarelo" value="<?= $produto->cor ?>">
+                    <select name="tipoProduto" id="tipoProduto">
+                        <option value="0">Selecione</option>
+                        <?php foreach ($cores as $cor) : ?>
+                            <?php if($cor['id_cor'] == $produto->cor): ?>
+                                <option value="<?= $cor['id_cor'] ?>" selected><?= utf8_decode($cor['cor']) ?></option>
+                            <?php else :?>
+                                <option value="<?= $cor['id_cor'] ?>"><?= utf8_decode($cor['cor']) ?></option>
+                            <?php endif ?>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
 
@@ -165,12 +174,13 @@
             <div class="hundred wide field">
                 <label><font color="#363636">Descrição</font></label>
                 <label><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></label>
-                <textarea rows="2" name="descricao" placeholder="Escreva aqui a descrição de seu produto." value="<?= $produto->descricao ?>"></textarea>
+                <textarea rows="2" name="descricao" placeholder="Escreva aqui a descrição de seu produto." ><?= $produto->descricao ?></textarea>
             </div>
             <div class="">
                 <label><font color="black">Importar Imagens</font></label>
                 <div class="hundred wide field">
                     <div class="hundred wide field">
+                        <img src="../../assets/images/<?= $produto->imagem ?>" alt="">
                         <input type="file" name="imagem" value="<?= $produto->imagem ?>">
                     </div>
                 </div>
@@ -178,7 +188,9 @@
             <br>
             <button class="ui button" type="submit">EDITAR</button>
     </form>
+    <?php
 
+    ?>
 
 
 

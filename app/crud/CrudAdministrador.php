@@ -18,13 +18,10 @@ class CrudAdministrador{
     public function cadastrar($usuario){
 
         $sql = "INSERT INTO usuarios (nome, email, senha, telefone) VALUES ('{$usuario->getNome()}', '{$usuario->getEmail()}', '{$usuario->getSenha()}', '{$usuario->getTelefone()}')";
-
         $this->conexao->exec($sql);
 
         $id = $this->conexao->lastInsertId(); //pega o ultimo id cadastrado
-
         $sql = "INSERT INTO administrador (razao_social, cnpj, idUsuarios) VALUES ('{$usuario->razao_social}', '{$usuario->cnpj}', '{$id}')";
-
         $this->conexao->exec($sql);
     }
 
