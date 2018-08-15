@@ -1,19 +1,18 @@
 <?php
 
-class Usuario
-{
+class Usuario{
     protected $nome;
-    protected $id_usuario;
+    protected $idUsuarios;
     protected $telefone;
     protected $email;
     protected $senha;
 
-    function __construct($nome, $email, $senha, $telefone, $id_usuario = null) {
+    function __construct($nome, $email, $senha, $telefone, $idUsuarios = null) {
         $this->nome = $nome;
         $this->email = $email;
         $this->senha = $senha;
         $this->telefone = $telefone;
-        $this->id_usuario = $id_usuario;
+        $this->idUsuarios = $idUsuarios;
     }
 
     public function getNome(){
@@ -23,7 +22,7 @@ class Usuario
         $this->nome = $nome;
     }
     public function getIdUsuario(){
-        return $this->id_usuario;
+        return $this->idUsuarios;
     }
     public function getTelefone(){
         return $this->telefone;
@@ -49,5 +48,4 @@ class Usuario
     public function setSenha($senha){
         $this->senha = $senha;
     }
-
 }

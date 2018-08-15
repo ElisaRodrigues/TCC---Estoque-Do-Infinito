@@ -7,7 +7,7 @@ class Produto {
 
     public $nome;
     public $cor;
-
+    public $referencia;
     public $preco;
     public $estoqueMin;
     public $descricao;
@@ -18,10 +18,11 @@ class Produto {
 
     //cor, tamanho, descricao
 
-    function __construct($nome, $preco, $estoque, $estoqueMin, $descricao = null, $tamanho = null, $cor, $tipoProduto, $imagem = null, $id = null) {
+    function __construct($nome, $preco, $referencia, $estoque, $estoqueMin, $descricao = null, $tamanho = null, $cor, $tipoProduto, $imagem = null, $id = null) {
 
     	$this->nome = $nome;
         $this->preco = $preco;
+        $this->referencia = $referencia;
         $this->estoque = $estoque;
         $this->estoqueMin = $estoqueMin;
         $this->tipoProduto = $tipoProduto;

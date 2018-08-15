@@ -1,24 +1,16 @@
 <?php
 
     require_once "Usuario.php";
-
 class Vendedor extends Usuario {
     public $cpf;
     public $empresa;
+    public $idVendedor;
 
-    public function __construct($nome, $email, $senha, $telefone, $cpf, $empresa ,$id_usuario = null){
-        parent::__construct($nome, $email, $senha, $telefone, $id_usuario);
+    public function __construct($nome, $email, $senha, $telefone, $cpf, $empresa ,$idUsuario = null, $idVendedor = null){
+        parent::__construct($nome, $email, $senha, $telefone, $idUsuario);
 
         $this->cpf = $cpf;
         $this->empresa = $empresa;
-
-    }
-
-    public function getId(){
-        return $this->id;
-    }
-
-    public function setId($id){
-        $this->id = $id;
+        $this->idVendedor = $idVendedor;
     }
 }
