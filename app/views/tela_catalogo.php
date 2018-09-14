@@ -72,7 +72,7 @@
 
                 <a href="tela_inicio.php" class="active item">Início</a>
                 <a href="ajuda.phtml" class="item">Ajuda</a>
-                <a href="tela_sobre.html" class="item">Sobre</a>
+                <a href="tela_sobre.php" class="item">Sobre</a>
                 <br class="ui search"><br>
                 <div class="ui transparent left icon input">
                     <input type="text" placeholder="Procurar">
@@ -99,12 +99,12 @@
             <?php foreach($listaProdutos as $produto): ?>
 
             <div class="ui small image imagem-catalogo">
-                <img  src="../../assets/images/blusa6.jpg">
-                <h2><?= $produto['nome']; ?> <?= $produto['id_produto']; ?> </h2>
+                <img  src="../../assets/images/blusa14.jpg">
+                <h2><?= $produto['nome']; ?> <?= $produto['idProdutos']; ?> </h2>
                 <h3>R$<?= $produto['preco']; ?></h3>
-                <a href="?acao=detalhar&id=<?= $produto['id_produto']?>">ver mais</a>
-                <a href="?acao=editar&id=<?= $produto['id_produto']?>">editar</a>        <!--EDITARRRRRRRRRRRRRRRRR-->
-                <a href="?acao=excluir&id=<?= $produto['id_produto']?>">excluir</a>
+                <a href="?acao=detalhar&id=<?= $produto['idProdutos']?>">ver mais</a>
+                <a href="?acao=editar&id=<?= $produto['idProdutos']?>">editar</a>        <!--EDITARRRRRRRRRRRRRRRRR-->
+                <a href="?acao=excluir&id=<?= $produto['idProdutos']?>">excluir</a>
 
             </div>
 

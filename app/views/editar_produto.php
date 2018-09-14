@@ -82,7 +82,7 @@
 
                 <a href="tela_inicio.php" class="active item">Início</a>
                 <a href="ajuda.phtml" class="item">Ajuda</a>
-                <a href="tela_sobre.html" class="item">Sobre</a>
+                <a href="tela_sobre.php" class="item">Sobre</a>
                 <br class="ui search"><br>
                 <div class="ui transparent left icon input">
                     <input type="text" placeholder="Procurar">
@@ -98,7 +98,7 @@
         <h1><label><font color="white">Editar Produto <?= $produto->nome ?> </font> </h1>
         </div><br>
 
-        <!--formulario de cadastro -->
+        <!--formulario de edição -->
     <form class="ui form" action="../controllers/produto_controller.php?acao=salvar" method="post">
 
         <div class="field">
@@ -124,7 +124,7 @@
                 </div>
                 <div class="field">
                     <label><font color="#363636" size="2">Cor</font></label>
-                    <select name="tipoProduto" id="tipoProduto">
+                    <select name="cor" id="id_cor">
                         <option value="0">Selecione</option>
                         <?php foreach ($cores as $cor) : ?>
                             <?php if($cor['id_cor'] == $produto->cor): ?>
@@ -180,7 +180,7 @@
                 <label><font color="black">Importar Imagens</font></label>
                 <div class="hundred wide field">
                     <div class="hundred wide field">
-                        <img src="../../assets/images/<?= $produto->imagem ?>" alt="">
+                        <img src="../../assets/imagesSalvas/<?= $produto->imagem ?>" alt="">
                         <input type="file" name="imagem" value="<?= $produto->imagem ?>">
                     </div>
                 </div>

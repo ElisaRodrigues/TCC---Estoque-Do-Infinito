@@ -1,7 +1,4 @@
 <?php
-
-//ARRUMAR O getVendedor
-
 require_once '../database/Conexao.php';
 require_once '../models/Administrador.php';
 
@@ -13,20 +10,16 @@ class CrudAdministrador{
         $this->conexao = Conexao::getConexao();
     }
 
-    //cadastrar user
-    //OKAY
     public function cadastrar($usuario){
 
         $sql = "INSERT INTO usuarios (nome, email, senha, telefone) VALUES ('{$usuario->getNome()}', '{$usuario->getEmail()}', '{$usuario->getSenha()}', '{$usuario->getTelefone()}')";
         $this->conexao->exec($sql);
 
         $id = $this->conexao->lastInsertId(); //pega o ultimo id cadastrado
-        $sql = "INSERT INTO administrador (razao_social, cnpj, idUsuarios) VALUES ('{$usuario->razao_social}', '{$usuario->cnpj}', '{$id}')";
-        $this->conexao->exec($sql);
+        $sq = "INSERT INTO administrador (razao_social, nome_fantasia, cnpj, id_usuarios) VALUES ('{$usuario->razao_social}', '{$usuario->nome_fantasia}', '{$usuario->cnpj}', '{$id}')";
+        $this->conexao->exec($sq);
     }
 
-    //retorna todos os users em forma de um array associativo
-    //OKAY --- falta pegar os dados da table user
     public function getAdministradores(){
         $sql = "select * from administrador";
         $administradores = $this->conexao->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -34,37 +27,44 @@ class CrudAdministrador{
         print_r($administradores);
     }
 
-    //retorna um produto em forma de array associativo
-    //EM PRODUÇÃO -- indefinido nome, email,senha, telefone,  id (o que esta cadastrado na table usuarios)
     public function getAdministrador($idAdministrador){
-        //$consulta = $this->conexao->query("SELECT * FROM administrador WHERE idAdministrador  = $idAdministrador");
-       // $administrador = $consulta->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT usuarios.idUsuarios, usuarios.nome,email,senha,telefone, administrador.razao_social,nome_fantasia,cnpj
+                  FROM administrador INNER JOIN usuarios ON administrador.id_usuarios = usuarios.idUsuarios
+                  WHERE usuarios.idUsuarios = id_usuarios ";
+        $administrador = $this->conexao->query($sql)->fetch(PDO::FETCH_ASSOC);
 
-          $sql = "SELECT usuarios.nome,email,senha,telefone, administrador.razao_social,cnpj
-                  FROM administrador INNER JOIN usuarios ON administrador.idUsuarios = usuarios.idUsuarios
-                  WHERE usuaros.idUsuarios = idUsuarios ";
-
-          $administrador = $this->conexao->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-        print_r($administrador);
-
-        return new Administrador($administrador['nome'], $administrador['email'], $administrador['senha'], $administrador['telefone'], $administrador['razao_social'], $administrador['cnpj'], $administrador['id']);
+        return new Administrador($administrador['nome'], $administrador['email'], $administrador['senha'], $administrador['telefone'], $administrador['razao_social'], $administrador['nome_fantasia'], $administrador['cnpj'], $administrador['idUsuarios']);
 
     }
 
-    //excluir administrador
-    //OKAY
     public function excluir($idAdministrador){
         $this->conexao->exec("DELETE FROM administrador WHERE idAdministrador = $idAdministrador");
     }
+
+//Dar uma olhadinha com muito carinho
+    public function editar(Administrador $idAdministrador){
+        $this->conexao->exec("UPDATE Administrador SET '{$administrador->nome}'                                                             
+                                                                 '{$administrador->email}',
+                                                                 '{$administrador->senha}',
+                                                                  {$administrador->telefone},
+                                                                 '{$administrador->razao_social}', 
+                                                                 '{$administrador->nome_fantasia}', 
+                                                                  {$administrador->cnpj}, 
+                                                                  {$administrador->idUsuario}
+            WHERE idAdministrador = {$idAdministrador}");
+    }
 }
 
-$adm = new Administrador("ana","ana@teste.com", "123", 7468276482369, "maia", 8479582398723);
+//TESTES
 
-$crud = new CrudAdministrador();
+//$adm = new Administrador("leaneth","leaneth@teste.com", "123", 65432189, "leaneth", "leaneth" ,46587427649);
 
-$crud->getAdministradores();
+//$crud = new CrudAdministrador();
 
-//$crud->cadastrar($adm);
+//$crud->getAdministradores(); //Okay - funcionando
 
-//$crud->excluir(14);
+//$crud->getAdministrador(31); //Okay - funcionando
+
+//$crud->cadastrar($adm); //Okay - funcionando
+
+//$crud->excluir(1); //Okay - funcionando

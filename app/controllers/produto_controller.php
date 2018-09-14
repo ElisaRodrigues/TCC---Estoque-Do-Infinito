@@ -1,73 +1,66 @@
-<?php 
+<?php
 
-require_once '../crud/CrudProdutos.php';
-require_once '../models/Produto.php';
-
+require_once __DIR__.'/../crud/CrudProdutos.php';
+require_once __DIR__.'/../models/Produto.php';
 
 function cadastrar(){ //OKAY
     $crud = new CrudProdutos();
     $tipos = $crud->getTiposProduto();
     $tamanhos = $crud->getTamanhos();
     $cores =  $crud->getCores();
-
-	include '../views/cadastro_produtos.php';
+    $imagens =  $crud->getImagens();
+	include __DIR__.'/../views/perfil_admin/cadastroprodutos.php';
 }
 
-function salvar(){ //DANDO ERRO
+function salvar(){
      echo "<pre>";
-
     $origem = $_FILES['imagem']['tmp_name'];
     $destino = date('dmyhis').$_FILES['imagem']['name'];
+    move_uploaded_file($origem, 'http://localhost/tcc/assets/imagesSalvas/'.$destino);
 
-    move_uploaded_file($origem, '../../assets/images/'.$destino);
-
-    $produto = new Produto($_POST['nome'], $_POST['preco'], $_POST['estoque'],  $_POST['estoqueMin'], $_POST['descricao'],$_POST['tamanho'], $_POST['cor'], $_POST['tipoProduto'], $destino);
-
+    $produto = new Produto($_POST['nome'], $_POST['preco'], $_POST['referencia'], $_POST['estoque'],  $_POST['estoqueMin'], $_POST['descricao'],$_POST['tamanho'], $_POST['cor'], $_POST['tipoProduto'], $destino);
     $crud = new CrudProdutos();
     $resultado = $crud->cadastrar($produto);
-
     if ($resultado == 1) {
         listar();
     }
-
-    echo "chegou na rota";
-    header("Location: produto_controller.php");
+    header("Location: http://localhost/tcc/app/controllers/produto_controller.php?acao=listar");
 }
 
-function listar(){ //OKAY
+function listar(){
+    session_start();
     $crud = new CrudProdutos();
     $listaProdutos = $crud->getProdutos();
 
-    require '../views/tela_catalogo.php';
+    //require __DIR__.'/../views/perfil_vendedor/catalogo.php';
+    require_once __DIR__ .'/../views/perfil_admin/catalogo.php';
 }
 
 function editar ($id){ //TA DANDO ERRADO
-    $crud     = new CrudProdutos();
+    $id = 5;
+    $crud  = new CrudProdutos();
     $tipos = $crud->getTiposProduto();
     $tamanhos = $crud->getTamanhos();
     $cores =  $crud->getCores();
-
     $produto  = $crud->getProduto($id);
-
-    include '../views/editar_produto.php';
+    include __DIR__.'/../views/editar_produto.php';
 }
-
-function excluir($id){ //OKAY
+function excluir($id){ //ATIVAR E DESATIVAR
     $crud = new CrudProdutos();
     $crud->excluir($id);
-
     listar();
 }
 
 function detalhar($id){
-
+    $id = 5;
+    $crud = new CrudProdutos();
+    $crud->getProduto($id);
+    require __DIR__.'/../views/perfil_vendedor/informacoesProduto.php';
 }
-
 //ROTAS
 if (isset($_GET['acao']) && !empty($_GET['acao']) ) {
 
 	if ($_GET['acao'] == 'cadastrar') {
-		echo "chegou na rota";
 		cadastrar();
 	
 	} elseif ($_GET['acao'] == 'salvar') {
@@ -77,19 +70,18 @@ if (isset($_GET['acao']) && !empty($_GET['acao']) ) {
 		editar($_GET['id']);
 
 	} elseif ($_GET['acao'] == 'excluir') {
-		excluir($_GET['id']);
+		//excluir($_GET['id']);
 
 	} elseif ($_GET['acao'] == 'listar') {
         listar();
 
     } elseif ($_GET['acao'] == 'detalhar') {
-        listar();
+        //detalhar($id);
 
 	} else {
-		echo "sera redirecionado pra lista";
         listar();
+
 	}
 } else {
 	listar();
 }
-

@@ -1,103 +1,120 @@
-    <?php
-
+<?php
     require_once '../database/Conexao.php';
     require_once '../models/Produto.php';
 
     class CrudProdutos{
         
         private $conexao;
-        private $produto;
+        public $produto;
         
         public function __construct(){
             $this->conexao = Conexao::getConexao();
         }
 
-        //cadastrar produto
-        //EM PRODUÇÃO
         public function cadastrar(Produto $produto){
-            $sql = "INSERT INTO produtos (nome, preco, estoque, estoque_min, descricao, cor,  idTipoProduto, imagem) 
-                    VALUES ('{$produto->nome}', {$produto->preco}, {$produto->estoque}, {$produto->estoqueMin}, 
-                    '{$produto->descricao}', '{$produto->cor}', {$produto->tipoProduto}, '{$produto->imagem}')";
+            $sql = "INSERT INTO produtos (nome, preco, referencia, estoque, estoque_min, descricao,  idTipoProduto) 
+                    VALUES ('{$produto->nome}', '{$produto->preco}', {$produto->referencia}, {$produto->estoque}, {$produto->estoqueMin}, 
+                    '{$produto->descricao}', {$produto->tipoProduto})";
             $this->conexao->exec($sql);
-
             $id = $this->conexao->lastInsertId();
 
+            //imagem
+            $sqlImg = "INSERT INTO  imagem (imagem) VALUE ('$produto->imagem')";
+            $this->conexao->exec($sqlImg);
+            $idImagem = $this->conexao->lastInsertId();
+
+            //cor
+            $sqlCor = "INSERT INTO  cor (cor) VALUE ('$produto->cor')";
+            $this->conexao->exec($sqlCor);
+            $idCor = $this->conexao->lastInsertId();
+
+            //tamanho
+            $sqlTamanho = "INSERT INTO  tamanho (tamanho) VALUE ('$produto->tamanho')";
+            $this->conexao->exec($sqlTamanho);
+            $idTamanho = $this->conexao->lastInsertId();
+
+
             //prod_tamanho
-            $sql = "insert into prod_tamanho (idTamanho, idProdutos) values ({$produto->tamanho}, {$id})";
-            $this->conexao->exec($sql);
+            $pt = "insert into prod_tamanho (tam_id_tam, prod_id_prod) values ({$produto->tamanho}, {$id})";
+            @$this->conexao->exec($pt);
+
+            //prod_imagem
+            print_r($idImagem);
+            print_r($id);
+            $pi = "insert into prod_imagem (img_id_img, prod_id_prod) values ({$idImagem}, {$id})";
+            @$this->conexao->exec($pi);
+
+            //prod_cor
+            $pc = "insert into prod_cor (cor_id_cor, prod_id_prod) values ({$idCor}, {$id})";
+            @$this->conexao->exec($pc);
         }
 
-        //retorna os tipos de produtos
-        //OKAY
         public function getTiposProduto(){
             $res = $this->conexao->query("select * from tipo_produto order by tipo");
             $tipos = $res->fetchAll(PDO::FETCH_ASSOC);
             return $tipos;
         }
 
-        //retorna os tamanhos dos produtos
-        //OKAY
         public function getTamanhos(){
             $res = $this->conexao->query("select * from tamanho order by tamanho");
             $tamanhos = $res->fetchAll(PDO::FETCH_ASSOC);
             return $tamanhos;
         }
 
-        //retorna as cores dos produtos
-        //OKAY
         public function getCores(){
             $res = $this->conexao->query("select * from cor order by cor");
             $cores = $res->fetchAll(PDO::FETCH_ASSOC);
             return $cores;
         }
 
-        //retorna todos produtos em forma de um array associativo
-        //OKAY
         public function getProdutos(){
             $consulta = $this->conexao->query("SELECT * FROM produtos");
-
             $arrayProdutos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+            //print_r($arrayProdutos);
 
             return $arrayProdutos;
         }
 
-        //retorna um produto em forma de array associativo
-        //OKAY
+        public function getImagens(){
+            $consulta = $this->conexao->query("SELECT * FROM imagem");
+            $imagens = $consulta->fetchAll(PDO::FETCH_ASSOC);
+            return $imagens;
+        }
+
         public function getProduto($id){
-            $consulta = $this->conexao->query("SELECT * FROM produtos p, prod_tamanho t WHERE p.id_produto = {$id} and t.idProdutos=p.id_produto");
+            $consulta = $this->conexao->query("SELECT * FROM produtos WHERE idProdutos = {$id}");
             $produto = $consulta->fetch(PDO::FETCH_ASSOC);
-            return new Produto($produto['nome'], $produto['preco'], $produto['estoque'], $produto['estoque_min'], $produto['descricao'],
-                               $produto['idTamanho'], $produto['cor'], $produto['idTipoProduto'], $produto['imagem'], $produto['id_produto'] );
+
+            //print_r($produto);
+
+            return new Produto($produto['nome'], $produto['preco'], $produto['referencia'], $produto['estoque'], $produto['estoque_min'],
+                               $produto['descricao'],$produto['tamanho'], $produto['cor'], $produto['idTipoProduto'], $produto['imagem'],
+                               $produto['id_produto'] );
         }
 
-        //excluir produto
-        //OKAY
-        public function excluir($idProduto){
-            $this->conexao->exec("DELETE FROM produtos WHERE id_produto = $idProduto");
-        }
-
-        //editar produtos
-        //FAZEEEEEEEEEEEEEEEER
-        public function editar($idProduto, $produto){
+        public function editar($id, $produto){
             $this->conexao->exec("UPDATE Produtos SET '{$produto->nome}'                                                             
-                                                                 {$produto->preco}, 
+                                                                 {$produto->preco},
+                                                                 {$produto->referencia},
+                                                                 {$produto->estoque},
                                                                  {$produto->estoqueMin}, 
                                                                 '{$produto->descricao}', 
                                                                 '{$produto->tamanho}', 
                                                                 '{$produto->cor}',
-                                                                 {$produto->estoque},
+                                                                 {$produto->idTipoProduto}
                                                                  {$produto->imagem},
-                                                                 {$produto->idTipoProduto} 
                                                                  {$produto->id_produto}
-            WHERE id_produto = {$idProduto}");
+            WHERE id_produto = {$id}");
         }
-
-
     }
 
+$prod = new Produto("teste domingo", 200, 344, 100, "bla", "","vermelha", "casaco","", "","" );
 
-//    $prod = new Produto("Teste", 200, 344, 100, "bla", "", "vermelha", "casaco","", "" );
+$crud = new CrudProdutos();
 
-//    $crud = new CrudProdutos();
+//$crud->cadastrar($prod); //Errooooooooo
 
-//    $crud->getProduto(21);
+//$crud->getProduto(28); //Quase Okay   Undefined index: tamanho; cor; imagem; id_produto;
+
+//$crud->getProdutos();  //Quase Okay - nao vem tamanho; cor; imagem;

@@ -78,9 +78,9 @@
                     <i class="sidebar icon"></i>
                 </a>
 
-                <a href="tela_inicio.php" class="active item">Início</a>
-                <a href="ajuda.phtml" class="item">Ajuda</a>
-                <a href="tela_sobre.html" class="item">Sobre</a>
+                <a href="http://localhost/tcc/app/views/tela_inicio.php" class="active item">Início</a>
+                <a href="http://localhost/tcc/app/views/ajuda.phtml" class="item">Ajuda</a>
+                <a href="http://localhost/tcc/app/views/tela_sobre.php" class="item">Sobre</a>
                 <br class="ui search"><br>
                     <div class="ui transparent left icon input">
                     <input type="text" placeholder="Procurar">

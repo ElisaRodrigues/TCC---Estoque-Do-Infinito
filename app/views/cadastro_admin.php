@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
     <!-- Site Properties -->
-    <title>Projeto</title>
+    <title>Cad_Admin</title>
     <link rel="stylesheet" type="text/css" href="../../assets/semantic/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/style.css">
 
@@ -43,7 +43,23 @@
 </head>
 <body>
 
-
+<!-- MENU FIXO -->
+<div class="ui large top fixed hidden menu borderless">
+    <div class="ui container">
+        <a class="active item">Início</a>
+        <a class="item">Ajuda</a>
+        <a class="item">Sobre</a>
+        <a class="item">Login</a>
+        <div class="right menu">
+            <div class="item">
+                <a class="ui button">entrar</a>
+            </div>
+            <div class="item">
+                <a class="ui primary button">cadastrar-se</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
@@ -55,7 +71,8 @@
 
 <!-- Page Contents -->
 <div class="pusher">
-    <div class="ui inverted vertical masthead center aligned segment tela-ajuda" >
+
+    <div class="ui inverted vertical masthead center aligned segment tela-cadastro-admin" >
 
         <div class="ui container">
             <div class="ui large secondary inverted pointing menu">
@@ -64,41 +81,70 @@
                 </a>
                 <img src="">
                 <a href="tela_inicio.php" class="active item">Início</a>
-                <a class="item">Ajuda</a>
+                <a href="ajuda.phtml" class="item">Ajuda</a>
                 <a href="tela_sobre.php" class="item">Sobre</a>
+                <div class="ui search">
+                    <br> <div class="ui transparent left icon input">
+                    <input type="text" placeholder="Procurar">
+                    <i class="search icon"></i>
+                </div>
+                    <div class="results"></div>
+                </div>
                 <div class="right item">
-                    <a href="tela_inicio.php" class="ui inverted button">Cadastrar</a>
-                    <a href="login.php" class="ui inverted button">Entrar</a>
+                    <a href="../crud/verifica_usuario.php" class="ui inverted button">entrar <i class="sign in icon float right"></i></a>
                 </div>
             </div>
-        </div><br><br>
+        </div>
 
-        <div class="ui text container" style = "text-align : left;">
 
-            <h1 class="ui  left floated texto-maior">
-                Saiba como utilizar nosso site!
-            </h1>
-            <h2 class="ui left floated segundo-texto">
-                Como se cadastrar:
-            </h2>
-            <div align="left">
-                <h3 class="ui left floated terceiro-texto">
-                    1º Ao entrar em nossa plataforma, a primeira coisa a se fazer é escolher
-                    o seu tipo de cadastro.<br>
-                    2º Como saber qual é meu tipo de cadastro? É simples! Se você possui uma
-                    uma micro ou pequena empresa você é do usuário tipo administrador. Se
-                    apenas vende para uma determinada empresa cadastrada você é do tipo vendedor!<br>
-                    3º Após identificar seu tipo de cadastro, selecione o campo adequado abaixo do
-                    botão "cadastre-se" e clique no botão "cadastre-se". Este botão ira redirecioná-lo
-                    para sua tela de cadastro, preencha todas as informações e clique no botão "cadastrar".<br>
-                    4º Parabéns! Agora você faz parte de nosso sistema! <br><br>
 
-                </h3>
-            </div>
+
+
+
+        <div class="ui text container form-sobre-fotos" >
+            <div class="ui text container centered aligned">
+                <h1><label><font color="white">Cadastro de Administrador</font> </h1>
+            </div><br>
+
+            <!--formulario de cadastro -->
+            <form class="ui form" action="../controllers/admin_controller.php?acao=salvar" method="post">
+
+                <div class="field">
+                    <label><font color="#363636">Nome Completo</font></label>
+                    <input type="text" name="nome" placeholder="Nome completo">
+                </div>
+                <div class="field">
+                    <label><font color="#363636">Endereço de email</font></label>
+                    <input type="text" name="email" placeholder="exemplo@exe.com">
+                </div>
+                <div class="field">
+                    <label><font color="#363636">CNPJ</font></label>
+                    <input type="text" name="cnpj" placeholder="XX.XXX.XXX/0001-XX">
+                </div>
+                <div class="field">
+                    <label><font color="#363636">Telefone</font></label>
+                    <input type="text" name="telefone" placeholder="telefone">
+                </div>
+                <div class="field">
+                    <label><font color="#363636">Razão social</font></label>
+                    <input type="text" name="razao_social" placeholder="Razão sozial">
+                </div>
+                <div class="field">
+                    <label><font color="#363636">Nome fantasia</font></label>
+                    <input type="text" name="nome_fantasia" placeholder="Nome fantasia">
+                </div>
+                <div class="field">
+                    <label><font color="#363636">Senha</font></label>
+                    <input type="text" name="senha" placeholder="*********">
+                </div>
+
+                <button class="ui button" type="submit">Cadastrar</button>
+            </form>
 
         </div>
 
     </div>
+
     <!-- RODAPE-->
     <div class="ui inverted vertical footer segment">
         <div class="ui container">
@@ -130,9 +176,6 @@
     </div>
 
 </div>
-
-
-
 
 </body>
 

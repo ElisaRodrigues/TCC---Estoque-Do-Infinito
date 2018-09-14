@@ -82,7 +82,7 @@
                 <img src="">
                 <a href="tela_inicio.php" class="active item">Início</a>
                 <a href="ajuda.phtml" class="item">Ajuda</a>
-                <a href="tela_sobre.html" class="item">Sobre</a>
+                <a href="tela_sobre.php" class="item">Sobre</a>
                 <br> <div class="ui transparent left icon input">
                     <input type="text" placeholder="Procurar">
                     <i class="search icon"></i>
@@ -98,42 +98,68 @@
                 <h1>Cadastro de Vendedor</h1>
             </div><br>
 
-            <!--formulario de cadastro -->
-            <form class="ui form" action="tela_perfil_vend.html" method="post">
 
+
+
+
+
+
+
+
+
+
+
+            <!--formulario de cadastro -->
+            <form class="ui form" action="../controllers/vend_controller.php?acao=salvar" method="post">
+                <!--NOME -->
                 <div class="field">
                     <label><font color="#363636">Nome Completo</font></label>
-                    <input type="text" name="Nome completo" placeholder="Nome completo">
+                    <input type="text" name="nome" placeholder="Nome completo">
                 </div>
+                <!--TELEFONE -->
                 <div class="field">
                     <label><font color="#363636">Telefone</font></label>
-                    <input type="text" name="Nome completo" placeholder="Telefone">
+                    <input type="text" name="telefone" placeholder="Telefone">
                 </div>
 
-
+                <!--EMAIL -->
                 <div class="field">
                     <label><font color="#363636">Endereço de email</font></label>
-                    <input type="text" name="first-name" placeholder="exemplo@exe.com">
+                    <input type="text" name="email" placeholder="exemplo@exe.com">
                 </div>
+
+                <!--CPF -->
                 <div class="field">
                     <label><font color="#363636">CPF</font></label>
-                    <input type="text" name="last-name" placeholder="XXX.XXX.XXX-XX">
+                    <input type="text" name="cpf" placeholder="XXX.XXX.XXX-XX">
                 </div>
 
+                <!--EMPRESA -->
                 <div class="field">
                     <label><font color="#363636">Empresa</font></label>
-                    <input type="text" name="first-name" placeholder="Empresa para qual trabalha: nome fantasia" id="nome">
+                    <input type="text" name="empresa" placeholder="Empresa para qual trabalha: nome fantasia" id="nome">
                 </div>
-
-
-
+                <!--senha -->
                 <div class="field">
                     <label><font color="#363636">Senha</font></label>
-                    <input type="text" placeholder="*********">
+                    <input type="text" name="senha" placeholder="*********">
                 </div>
 
                 <button class="ui button">Cadastrar</button>
             </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </div>
 

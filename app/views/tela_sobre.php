@@ -55,7 +55,7 @@
 
 <!-- Page Contents -->
 <div class="pusher">
-    <div class="ui inverted vertical masthead center aligned segment tela-ajuda" >
+    <div class="ui inverted vertical masthead center aligned segment tela-sobre" >
 
         <div class="ui container">
             <div class="ui large secondary inverted pointing menu">
@@ -64,11 +64,18 @@
                 </a>
                 <img src="">
                 <a href="tela_inicio.php" class="active item">Início</a>
-                <a class="item">Ajuda</a>
+                <a href="ajuda.phtml" class="item">Ajuda</a>
                 <a href="tela_sobre.php" class="item">Sobre</a>
+                <div class="ui search">
+                    <br> <div class="ui transparent left icon input">
+                    <input type="text" placeholder="Procurar...">
+                    <i class="search icon"></i>
+                </div>
+                    <div class="results"></div>
+                </div>
                 <div class="right item">
-                    <a href="tela_inicio.php" class="ui inverted button">Cadastrar</a>
-                    <a href="login.php" class="ui inverted button">Entrar</a>
+                    <a href="tela_inicio.php" class="ui inverted button">cadastrar</a>
+                    <a href="../crud/verifica_usuario.php?acao=logout" class="ui inverted button">Entrar</a>
                 </div>
             </div>
         </div><br><br>
@@ -76,22 +83,27 @@
         <div class="ui text container" style = "text-align : left;">
 
             <h1 class="ui  left floated texto-maior">
-                Saiba como utilizar nosso site!
+                Sobre nós
             </h1>
             <h2 class="ui left floated segundo-texto">
-                Como se cadastrar:
+                Conheça a equipe ERROR 404 NOT FOUND
             </h2>
             <div align="left">
                 <h3 class="ui left floated terceiro-texto">
-                    1º Ao entrar em nossa plataforma, a primeira coisa a se fazer é escolher
-                    o seu tipo de cadastro.<br>
-                    2º Como saber qual é meu tipo de cadastro? É simples! Se você possui uma
-                    uma micro ou pequena empresa você é do usuário tipo administrador. Se
-                    apenas vende para uma determinada empresa cadastrada você é do tipo vendedor!<br>
-                    3º Após identificar seu tipo de cadastro, selecione o campo adequado abaixo do
-                    botão "cadastre-se" e clique no botão "cadastre-se". Este botão ira redirecioná-lo
-                    para sua tela de cadastro, preencha todas as informações e clique no botão "cadastrar".<br>
-                    4º Parabéns! Agora você faz parte de nosso sistema! <br><br>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque eum facere harum ipsam nulla, quam similique. Asperiores dolore eveniet itaque laboriosam minima minus mollitia quis saepe tempora totam! Ab, voluptatem
+                    <!doctype html>
+                    <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport"
+                              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+                        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                        <title>Document</title>
+                    </head>
+                    <body>
+
+                    </body>
+                    </html>
 
                 </h3>
             </div>

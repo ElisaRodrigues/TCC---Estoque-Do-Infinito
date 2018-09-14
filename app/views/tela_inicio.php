@@ -48,10 +48,10 @@
   <div class="ui container">
     <a href="tela_inicio.php" class="active item">Início</a>
     <a href="ajuda.phtml" class="item">Ajuda</a>
-    <a href="tela_sobre.html" class="item">Sobre</a>
+    <a href="tela_sobre.php" class="item">Sobre</a>
     <div class="right menu">
       <div class="item">
-        <a href="login.php" class="ui button">Entrar <i class="sign in icon float right"></i></a>
+        <a href="../crud/verifica_usuario.php?acao=logout" class="ui button">Entrar <i class="sign in icon float right"></i></a>
       </div>
       <div class="item">
       </div>
@@ -79,9 +79,9 @@
         </a>
     <img src="">
     <a class="active item">Início</a>
-    <a href="ajuda.phtml" class="item">Ajuda</a>
+    <a href="http://localhost/tcc/app/views/ajuda.phtml" class="item">Ajuda</a>
         <a href="#o-que-fazemos" class="item">O que fazemos</a>
-    <a href="tela_sobre.html" class="item">Sobre</a>
+    <a href="http://localhost/tcc/app/views/tela_sobre.php" class="item">Sobre</a>
         <div class="ui search">
           <br> <div class="ui transparent left icon input">
           <input type="text" placeholder="Procurar...">
@@ -90,7 +90,7 @@
           <div class="results"></div>
         </div>
         <div class="right item">
-          <a href="login.html" class="ui inverted button">Entrar<i class="sign in icon float right"></i></a>
+          <a href="login.php" class="ui inverted button">Entrar<i class="sign in icon float right"></i></a>
 
           </div>
       </div>
@@ -98,16 +98,16 @@
 
     <div class="ui text container">
       <h1 class="ui inverted header">
-        Controle de Estoque
+        Estoque do Infinito
       </h1>
       <span class="question">Não é cadastrado ainda?</span>
       <span class="question">Escolha seu tipo de usuário!</span>
 
       <p><div class="ui  two fields">
         <div class="ui buttons">
-          <a href="cadastro_admin.html"><button class="ui button">administrador</button></a>
+          <a href="http://localhost/tcc/app/views/cadastro_admin.php"><button class="ui button">administrador</button></a>
           <div class="or" data-text="ou"></div>
-          <a href="cadastro_vend.html"><button class="ui positive button">vendedor</button></a>
+          <a href="http://localhost/tcc/app/views/cadastro_vend.html"><button class="ui positive button">vendedor</button></a>
         </div>
 
       </div>
@@ -120,12 +120,16 @@
       <div class="row">
         <div class="eight wide column">
           <h4 class="ui horizontal divider header"><i class="tag icon"></i> Fique Tranquilo, organizamos pra você! </h4>
-          <p>Nossa aplicação fornece um controle de estoque de forma que (...)
+          <p>
+              Nossa aplicação fornece um controle de estoque de forma que (...)
           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation ullamco laboris nisi ut gdgfd aliquip ex ea commodo duas
           consequat. Duis aute irure dolor in gfdgf reprehenderit in voluptate velit esse ea
           cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+          </p>
 
         </div>
         <div class="six wide right floated column">
