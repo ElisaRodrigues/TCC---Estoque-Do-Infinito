@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_SESSION['vendedor'])){
-    require_once __DIR__."/../perfil_vendedor/indexperfil.php";
+    echo "/../perfil_vendedor/indexperfil.php";
 }
 
 ?>

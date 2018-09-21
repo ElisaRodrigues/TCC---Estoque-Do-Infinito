@@ -32,19 +32,44 @@ function listar(){
     $crud = new CrudProdutos();
     $listaProdutos = $crud->getProdutos();
 
-    //require __DIR__.'/../views/perfil_vendedor/catalogo.php';
-    require_once __DIR__ .'/../views/perfil_admin/catalogo.php';
+    if(isset($_SESSION['vendedor'])){
+        require __DIR__.'/../views/perfil_vendedor/catalogo.php';
+    }else{
+        //require __DIR__.'/../views/perfil_vendedor/catalogo.php';
+        require_once __DIR__ .'/../views/perfil_admin/catalogo.php';
+    }
+
 }
 
 function editar ($id){ //TA DANDO ERRADO
     $id = 5;
-    $crud  = new CrudProdutos();
-    $tipos = $crud->getTiposProduto();
-    $tamanhos = $crud->getTamanhos();
-    $cores =  $crud->getCores();
-    $produto  = $crud->getProduto($id);
-    include __DIR__.'/../views/editar_produto.php';
+    //$crud  = new CrudProdutos();
+   // $tipos = $crud->getTiposProduto();
+    //$tamanhos = $crud->getTamanhos();
+    //$cores =  $crud->getCores();
+    //$produto  = $crud->getProduto($id);
+    //include __DIR__.'/../views/editar_produto.php';
+    //$crud->editar($id, $produto);
+    //cadastrar();
+    //salvar();
+    //header("Location: http://localhost/tcc/app/controllers/produto_controller.php?acao=listar");
+
+    if(isset($_POST)){
+        $crud  = new CrudProdutos();
+        $tipos = $crud->getTiposProduto();
+        $tamanhos = $crud->getTamanhos();
+        $cores =  $crud->getCores();
+        $produto  = $crud->getProduto($id);
+        include __DIR__.'/../views/editar_produto.php';
+        $produto = new Produto ($_POST['nome'], $_POST['preco'] ,$_POST['referencia'], ['estoque'], $_POST['estoqueMin'], $_POST['descricao'], $_POST['tamanho'], $_POST['cor'], $_POST['tipoProduto'], $_POST['imagem'], $_POST['id'] );
+        salvar();
+        header("Location: http://localhost/tcc/app/controllers/produto_controller.php?acao=listar");
+
+    }else{
+        header("Location: http://localhost/tcc/app/views/editar_produto.php");
+    }
 }
+
 function excluir($id){ //ATIVAR E DESATIVAR
     $crud = new CrudProdutos();
     $crud->excluir($id);

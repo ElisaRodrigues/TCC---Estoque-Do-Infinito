@@ -90,10 +90,13 @@
 
             return new Produto($produto['nome'], $produto['preco'], $produto['referencia'], $produto['estoque'], $produto['estoque_min'],
                                $produto['descricao'],$produto['tamanho'], $produto['cor'], $produto['idTipoProduto'], $produto['imagem'],
-                               $produto['id_produto'] );
+                $produto['idProdutos'] );
         }
 
-        public function editar($id, $produto){
+        //UPDATE `produtos` SET `nome` = 'new produtinho', `preco` = '364923', `estoque` = '893649238', `estoque_min` = '837401273',
+        // `descricao` = 'nacçlanc', `referencia` = '5' WHERE `produtos`.`idProdutos` = 5
+
+        public function editar($id, Produto $produto){
             $this->conexao->exec("UPDATE Produtos SET '{$produto->nome}'                                                             
                                                                  {$produto->preco},
                                                                  {$produto->referencia},
@@ -104,14 +107,14 @@
                                                                 '{$produto->cor}',
                                                                  {$produto->idTipoProduto}
                                                                  {$produto->imagem},
-                                                                 {$produto->id_produto}
+                                                                 {$produto->id}
             WHERE id_produto = {$id}");
         }
     }
 
-$prod = new Produto("teste domingo", 200, 344, 100, "bla", "","vermelha", "casaco","", "","" );
+//$prod = new Produto("teste domingo", 200, 344, 100, "bla", "","vermelha", "casaco","", "","" );
 
-$crud = new CrudProdutos();
+//$crud = new CrudProdutos();
 
 //$crud->cadastrar($prod); //Errooooooooo
 
