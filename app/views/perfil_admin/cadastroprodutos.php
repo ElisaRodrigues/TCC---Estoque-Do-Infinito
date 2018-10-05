@@ -10,7 +10,7 @@
                 </div><br>
 
                 <!--formulario de cadastro -->
-                <form class="ui form" action="http://localhost/tcc/app/controllers/produto_controller.php?acao=salvar" method="post">
+                <form class="ui form" action="http://localhost/tcc/app/controllers/produto_controller.php?acao=salvar" method="post" enctype="multipart/form-data">
 
                     <!--NOME-->
                     <div class="field">

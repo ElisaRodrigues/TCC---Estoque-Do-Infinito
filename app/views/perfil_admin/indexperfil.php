@@ -63,7 +63,8 @@ font-size: 16px;"><a href="http://localhost/tcc/app/crud/login/closed.php" class
 
 
                 <li>
-                    <a class="active-menu"  href="http://localhost/tcc/app/controllers/admin_controller.php?acao=listarAdmin&idAdministrador=<?= $administrador->idAdministrador; ?>"><i class="fa fa-desktop fa-3x"></i>Catálogo</a>
+                    <a class="active-menu"  href="http://localhost/tcc/app/controllers/produto_controller.php?acao=listar"><i class="fa fa-desktop fa-3x"></i>Catálogo</a>
+                   <!-- <a class="active-menu"  href="http://localhost/tcc/app/controllers/admin_controller.php?acao=listarAdmin&idAdministrador=<?= $administrador->idAdministrador; ?>"><i class="fa fa-desktop fa-3x"></i>Catálogo</a> -->
                 </li>
                 <li>
                     <a href="http://localhost/tcc/app/views/perfil_admin/informacoesperfil.php"><i class="glyphicon glyphicon-user fa-3x" style="margin-right: 10px" aria-hidden="true"></i>Perfil</a>

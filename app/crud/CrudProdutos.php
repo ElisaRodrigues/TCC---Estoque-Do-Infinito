@@ -19,17 +19,17 @@
             $id = $this->conexao->lastInsertId();
 
             //imagem
-            $sqlImg = "INSERT INTO  imagem (imagem) VALUE ('$produto->imagem')";
-            $this->conexao->exec($sqlImg);
-            $idImagem = $this->conexao->lastInsertId();
+           $sqlImg = "INSERT INTO  imagem (imagem) values ('$produto->imagem')";
+           $this->conexao->exec($sqlImg);
+           $idImagem = $this->conexao->lastInsertId();
 
             //cor
-            $sqlCor = "INSERT INTO  cor (cor) VALUE ('$produto->cor')";
+            $sqlCor = "INSERT INTO  cor (cor) values ('$produto->cor')";
             $this->conexao->exec($sqlCor);
             $idCor = $this->conexao->lastInsertId();
 
             //tamanho
-            $sqlTamanho = "INSERT INTO  tamanho (tamanho) VALUE ('$produto->tamanho')";
+            $sqlTamanho = "INSERT INTO  tamanho (tamanho) values ('$produto->tamanho')";
             $this->conexao->exec($sqlTamanho);
             $idTamanho = $this->conexao->lastInsertId();
 
@@ -39,10 +39,8 @@
             @$this->conexao->exec($pt);
 
             //prod_imagem
-            print_r($idImagem);
-            print_r($id);
-            $pi = "insert into prod_imagem (img_id_img, prod_id_prod) values ({$idImagem}, {$id})";
-            @$this->conexao->exec($pi);
+             $pi = "insert into prod_imagem (img_id_img, prod_id_prod) values ({$idImagem}, {$id})";
+             @$this->conexao->exec($pi);
 
             //prod_cor
             $pc = "insert into prod_cor (cor_id_cor, prod_id_prod) values ({$idCor}, {$id})";
@@ -86,11 +84,28 @@
             $consulta = $this->conexao->query("SELECT * FROM produtos WHERE idProdutos = {$id}");
             $produto = $consulta->fetch(PDO::FETCH_ASSOC);
 
+            //imagem
+            $sql = "SELECT img_id_img FROM prod_imagem where prod_id_prod = {$produto['idProdutos']}";
+            $id_img = $this->conexao->query($sql)->fetch();
+            $imagem1 = "SELECT imagem FROM imagem where imagem = {$id_img['img_id_img']}";
+            $imagem = $this->conexao->query($imagem1)->fetch();
+
+            //cor
+            $sql = "SELECT cor_id_cor FROM prod_cor where prod_id_prod = {$produto['idProdutos']}";
+            $id_cor = $this->conexao->query($sql)->fetch();
+            $cor1 = "SELECT cor FROM cor where cor = {$id_cor['cor_id_cor']}";
+            $cor = $this->conexao->query($cor1)->fetch();
+
+
+            //tamanho
+            $sql = "SELECT tam_id_tam FROM prod_tamanho where prod_id_prod = {$produto['idProdutos']}";
+            $id_tam = $this->conexao->query($sql)->fetch();
+            $tamanho = "SELECT tamanho FROM tamanho where tamanho = {$id_tam['tam_id_tam']}";
+
             //print_r($produto);
 
             return new Produto($produto['nome'], $produto['preco'], $produto['referencia'], $produto['estoque'], $produto['estoque_min'],
-                               $produto['descricao'],$produto['tamanho'], $produto['cor'], $produto['idTipoProduto'], $produto['imagem'],
-                $produto['idProdutos'] );
+                               $produto['descricao'],$tamanho, $cor, $produto['idTipoProduto'], $imagem, $produto['idProdutos'] );
         }
 
         //UPDATE `produtos` SET `nome` = 'new produtinho', `preco` = '364923', `estoque` = '893649238', `estoque_min` = '837401273',

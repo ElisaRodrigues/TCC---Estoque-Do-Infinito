@@ -11,9 +11,9 @@ require_once __DIR__."/indexperfil.php" ?>
                         <a href="#"><img class="card-img-top" src="http://www.azzaboutique.com.br/image/cache/data/blazer%20chic-600x600.jpg" alt=""></a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="http://localhost/tcc/app/views/perfil_admin/informacoesProduto.php"><?php echo $produto['nome'] ?></a>
+                                <a href="http://localhost/tcc/app/controllers/produto_controller.php?acao=detalhar&id=<?= $produto['idProdutos'] ?>"><?php echo $produto['nome'] ?></a>
                             </h4>
-                            <p class="card-text"><?php echo $produto['preco'] ?></p>
+                            <p class="card-text"><?= $produto['preco'] ?></p>
                         </div>
                     </div>
                 </div>

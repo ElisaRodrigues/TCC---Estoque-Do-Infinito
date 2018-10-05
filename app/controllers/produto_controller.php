@@ -13,17 +13,23 @@ function cadastrar(){ //OKAY
 }
 
 function salvar(){
-     echo "<pre>";
-    $origem = $_FILES['imagem']['tmp_name'];
-    $destino = date('dmyhis').$_FILES['imagem']['name'];
-    move_uploaded_file($origem, 'http://localhost/tcc/assets/imagesSalvas/'.$destino);
 
-    $produto = new Produto($_POST['nome'], $_POST['preco'], $_POST['referencia'], $_POST['estoque'],  $_POST['estoqueMin'], $_POST['descricao'],$_POST['tamanho'], $_POST['cor'], $_POST['tipoProduto'], $destino);
+    $origem = $_FILES['imagem']['tmp_name'];
+    $nome_img = date('dmyhis').$_FILES['imagem']['name'];
+    $destino = __DIR__.'/../../assets/imagesSalvas/'.$nome_img;
+
+
+    $x = move_uploaded_file($origem, $destino);
+
+
+    $produto = new Produto($_POST['nome'], $_POST['preco'], $_POST['referencia'], $_POST['estoque'],  $_POST['estoqueMin'], $_POST['descricao'],$_POST['tamanho'], $_POST['cor'], $_POST['tipoProduto'], $nome_img);
     $crud = new CrudProdutos();
     $resultado = $crud->cadastrar($produto);
+
     if ($resultado == 1) {
         listar();
     }
+
     header("Location: http://localhost/tcc/app/controllers/produto_controller.php?acao=listar");
 }
 
@@ -42,32 +48,16 @@ function listar(){
 }
 
 function editar ($id){ //TA DANDO ERRADO
-    $id = 5;
-    //$crud  = new CrudProdutos();
-   // $tipos = $crud->getTiposProduto();
-    //$tamanhos = $crud->getTamanhos();
-    //$cores =  $crud->getCores();
-    //$produto  = $crud->getProduto($id);
-    //include __DIR__.'/../views/editar_produto.php';
-    //$crud->editar($id, $produto);
-    //cadastrar();
-    //salvar();
-    //header("Location: http://localhost/tcc/app/controllers/produto_controller.php?acao=listar");
-
-    if(isset($_POST)){
-        $crud  = new CrudProdutos();
-        $tipos = $crud->getTiposProduto();
-        $tamanhos = $crud->getTamanhos();
-        $cores =  $crud->getCores();
-        $produto  = $crud->getProduto($id);
-        include __DIR__.'/../views/editar_produto.php';
-        $produto = new Produto ($_POST['nome'], $_POST['preco'] ,$_POST['referencia'], ['estoque'], $_POST['estoqueMin'], $_POST['descricao'], $_POST['tamanho'], $_POST['cor'], $_POST['tipoProduto'], $_POST['imagem'], $_POST['id'] );
-        salvar();
-        header("Location: http://localhost/tcc/app/controllers/produto_controller.php?acao=listar");
-
-    }else{
-        header("Location: http://localhost/tcc/app/views/editar_produto.php");
-    }
+    $id = 42;
+    $crud  = new CrudProdutos();
+    $tipos = $crud->getTiposProduto();
+    $tamanhos = $crud->getTamanhos();
+    $cores =  $crud->getCores();
+    $produto  = $crud->getProduto($id);
+    include __DIR__.'/../views/editar_produto.php';
+    $crud->editar($id, $produto);
+    salvar();
+    header("Location: http://localhost/tcc/app/controllers/produto_controller.php?acao=listar");
 }
 
 function excluir($id){ //ATIVAR E DESATIVAR
@@ -77,11 +67,11 @@ function excluir($id){ //ATIVAR E DESATIVAR
 }
 
 function detalhar($id){
-    $id = 5;
     $crud = new CrudProdutos();
-    $crud->getProduto($id);
-    require __DIR__.'/../views/perfil_vendedor/informacoesProduto.php';
+    $produto = $crud->getProduto($id);
+    require __DIR__.'/../views/perfil_admin/informacoesProduto.php';
 }
+
 //ROTAS
 if (isset($_GET['acao']) && !empty($_GET['acao']) ) {
 
@@ -101,7 +91,7 @@ if (isset($_GET['acao']) && !empty($_GET['acao']) ) {
         listar();
 
     } elseif ($_GET['acao'] == 'detalhar') {
-        //detalhar($id);
+        detalhar($_GET['id']);
 
 	} else {
         listar();
